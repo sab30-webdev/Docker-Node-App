@@ -1,0 +1,16 @@
+version: "3"
+services:
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "3000:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+  node-app:
+    build: .
+    volumes:
+      - ./:/app # bind mount to synchronise (dev)
+      - /app/node_modules # hack to prevent node_modules from being deleted when syncing (dev)
+    environment:
+      - PORT=3000
+    command: npm run dev
