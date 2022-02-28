@@ -8,7 +8,7 @@ app.use(cors());
 app.enable("trust proxy");
 
 app.get("/api", (req, res) => {
-  res.json("Hello World!!!!!!!!!!!!!!!!!!!!1");
+  res.json("Hello Docker");
   console.log("Load Balancing...");
 });
 
