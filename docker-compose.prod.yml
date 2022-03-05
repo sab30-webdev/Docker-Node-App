@@ -2,13 +2,6 @@ version: "3"
 services:
   nginx:
     image: nginx:stable-alpine
-    deploy:
-      replicas: 8
-      restart_policy:
-        condition: any
-      update_config:
-        parallelism: 2
-        delay: 10s
     ports:
       - "80:80"
     volumes:
@@ -16,6 +9,13 @@ services:
   node-app:
     build: . #not required in ubuntu vm
     image: 3072001/docker-node-app
+    deploy:
+      replicas: 4
+      restart_policy:
+        condition: any
+      update_config:
+        parallelism: 2
+        delay: 10s
     environment:
       - PORT=3000
     command: npm start

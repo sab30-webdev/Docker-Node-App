@@ -9,6 +9,13 @@ services:
   node-app:
     build: .
     image: 3072001/docker-node-app
+    deploy:
+      replicas: 4
+      restart_policy:
+        condition: any
+      update_config:
+        parallelism: 2
+        delay: 10s
     volumes:
       - ./:/app # bind mount to synchronise (dev)
       - /app/node_modules # hack to prevent node_modules from being deleted when syncing (dev)
